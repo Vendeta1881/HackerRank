@@ -1,0 +1,54 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    /*
+     * Complete the diagonalDifference function below.
+     */
+    static int diagonalDifference(int[][] a) {
+            int diagonal1 = 0;
+            int n = a.length;
+            int diagonal2 = 0;
+            int c = 0, d = n-1;
+            for (int baris = 0; baris < n;baris++) {
+                diagonal1+=a[baris][baris];
+            }
+            for (int baris1 = 0; baris1< n; baris1++) {
+                   
+                    diagonal2+=a[c][d];
+                 c++;
+                    d--;
+                }
+        return Math.abs(diagonal1 - diagonal2);
+    }
+
+    private static final Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(scan.nextLine().trim());
+
+        int[][] a = new int[n][n];
+
+        for (int aRowItr = 0; aRowItr < n; aRowItr++) {
+            String[] aRowItems = scan.nextLine().split(" ");
+
+            for (int aColumnItr = 0; aColumnItr < n; aColumnItr++) {
+                int aItem = Integer.parseInt(aRowItems[aColumnItr].trim());
+                a[aRowItr][aColumnItr] = aItem;
+            }
+        }
+
+        int result = diagonalDifference(a);
+
+        bw.write(String.valueOf(result));
+        bw.newLine();
+
+        bw.close();
+    }
+}
